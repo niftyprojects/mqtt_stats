@@ -4,7 +4,7 @@ from unittest.mock import MagicMock
 import pytest
 from paho.mqtt import client as mqtt
 
-from mqtt_stats import MQTTStats
+from mqtt_stats.mqtt_stats import MQTTStats
 
 
 class MockClient:

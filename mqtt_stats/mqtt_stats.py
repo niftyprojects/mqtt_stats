@@ -3,7 +3,7 @@ import logging
 
 from paho.mqtt import client as mqtt
 
-from .average import GroupedTimedAverage
+from mqtt_stats.average import GroupedTimedAverage
 
 
 class MQTTStats:
