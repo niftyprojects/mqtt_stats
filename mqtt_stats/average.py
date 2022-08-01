@@ -15,13 +15,18 @@ class TimedAverage:
         self.period = datetime.timedelta(seconds=period)
         self.values = []
 
-    def avg(self) -> float:
-        """Calculate the average of the passed in values."""
+    def __trim_old(self) -> None:
         tstamp = datetime.datetime.now(datetime.timezone.utc)
+        if len(self.values) > 0 and tstamp - self.values[-1][0] > self.period:
+            self.values = []
         for i in range(len(self.values)):
             if tstamp - self.values[i][0] <= self.period:
                 self.values = self.values[i:]
                 break
+
+    def avg(self) -> float:
+        """Calculate the average of the passed in values."""
+        self.__trim_old()
 
         if len(self.values) == 0:
             return 0.0

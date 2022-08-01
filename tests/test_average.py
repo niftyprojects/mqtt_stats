@@ -72,3 +72,12 @@ def test_older_values_are_removed(average, freeze):
     # 4 * 3 = 12 > 10.
     # last 3 values are [3, 4, 5] + 2
     assert average.avg() == (7 + 6 + 5) / 3
+
+
+def test_average_is_zero_if_all_values_are_old(average, freeze):
+    freeze.freeze(datetime.datetime(2022, 8, 1))
+    average.add(10)
+    average.add(20)
+    freeze.delta(seconds=20)
+
+    assert average.avg() == 0.0
