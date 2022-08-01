@@ -30,3 +30,34 @@ class TimedAverage:
     def add(self, value: int) -> None:
         """Add a value to the average."""
         self.values.append((datetime.datetime.now(datetime.timezone.utc), value))
+
+
+class GroupedTimedAverage:
+    """Calculates averages over several time periods."""
+
+    def __init__(self, periods: dict[str:int]):
+        """Create a group of TimedAverage classes.
+
+        Arguments:
+
+        periods
+          Each key is used as a key name for the returned averages. The value
+          associated with the key is the period in seconds to average over.
+        """
+        self.periods = {}
+        for k, v in periods.items():
+            self.periods[k] = TimedAverage(v)
+
+    def add(self, val: int) -> None:
+        """Add a value to all running averages."""
+        for a in self.periods.values():
+            a.add(val)
+
+    def avg(self) -> dict[str:float]:
+        """Calculate all the averages.
+
+        Returns a dictionary of floats, with the keys as provided on initilization."""
+        avgs = {}
+        for k, v in self.periods.items():
+            avgs[k] = v.avg()
+        return avgs
