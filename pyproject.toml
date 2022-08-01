@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mqtt_stats"
+description = "Calculates statistics on values from a MQTT broker."
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "BSD 3-Clause License"}
+version = "1.0.0"
+
+[project.scripts]
+mqtt_stats = "mqtt_stats.mqtt_stats:main"
+
+[tool.flake8]
+ignore = "E203,E266,H106,H904,E133"
+max-complexity = 25
+hang-closing = true
+max-doc-length = 88
+max-line-length = 88
+per-file-ignores = '*/__init__.py:F401'
+
+[tool.black]
+line-length = 88
+target-version = ['py36']
+
+[tool.isort]
+line_length = 88
+profile = "black"
+multi_line_output = 3
+py_version = 27
