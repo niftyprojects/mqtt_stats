@@ -1,16 +1,27 @@
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
 
-[project]
+[tool.poetry]
 name = "mqtt_stats"
 description = "Calculates statistics on values from a MQTT broker."
 readme = "README.md"
-requires-python = ">=3.7"
-license = {text = "BSD 3-Clause License"}
+license = "BSD 3-Clause License"
 version = "1.0.0"
+authors = ["Nathan Dyer <nathan@niftyprojects.net>"]
 
-[project.scripts]
+[tool.poetry.dependencies]
+python = ">=3.7,<4.0"
+paho-mqtt = "^1.6.1"
+
+[tool.poetry.dev-dependencies]
+flake9 = "^3.8.3"
+black = "^22.6.0"
+isort = "^5.10.1"
+pytest = "^7.1.2"
+pre-commit = "^2.20.0"
+
+[tool.poetry.scripts]
 mqtt_stats = "mqtt_stats.cmd_line:main"
 
 [tool.flake8]
